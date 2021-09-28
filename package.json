@@ -25,6 +25,10 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+<<<<<<< HEAD
         "v-switch-case": "^1.0.3"
+=======
+        "yoyoo-ddr": "^0.4.0"
+>>>>>>> 6f80978fdc65d805e6318ae3073f63f8ba237176
     }
 }
