@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import VSwitch from 'v-switch-case'
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +28,11 @@ window.Vue.component('example-component', require('./components/ExampleComponent
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new window.Vue({
+ const  app = new Vue({
     el: '#app',
-});
+    data: {
+      message: 'You loaded this page on ' + new Date().toLocaleString()
+    }
+  })
+
+

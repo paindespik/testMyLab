@@ -17,4 +17,4 @@ use App\Http\Controllers\AccueilController;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('accueil', 'App\Http\Controllers\AccueilController@Accueil')->name('Accueil');
+Route::get('/', 'App\Http\Controllers\AccueilController@Accueil')->name('accueil');
