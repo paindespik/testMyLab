@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
     <div class="container">
         <div class="row">
             <div class="col text-center">
@@ -17,8 +18,13 @@
             </div>
         </div>
     </div>
+        <section id="app">
+                <example-component></example-component>
+        </section>
 </body>
+<script src="{{ url('/') }}/assets/js/jquery-3.6.0.min.js"></script>
 <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 </html>
 
