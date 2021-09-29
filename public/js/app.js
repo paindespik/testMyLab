@@ -2808,14 +2808,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
            }
       */
 
-      if (this.selected === true) {
-        this.$emit('unset');
-      } else if (this.selectOn === 'mousedown' || this.selected === false) {
+      if (this.selected === false) {
         this.$emit('onSelect');
         this.handleTranslation(event);
       }
     },
-    click: function click(event) {},
+    click: function click(event) {
+      if (this.selected === true) {
+        this.$emit('unset');
+      }
+    },
     dblClick: function dblClick(event) {
       this.$emit('dblclick', event);
 

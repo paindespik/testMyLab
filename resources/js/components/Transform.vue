@@ -225,10 +225,8 @@ export default {
                     this.$emit('onSelect')
                 }
 */
-            if(this.selected === true){
-                this.$emit('unset')
-            }
-            else if (this.selectOn === 'mousedown' || this.selected === false) {
+
+            if (this.selected === false) {
                 this.$emit('onSelect')
                 this.handleTranslation(event)
             }
@@ -236,7 +234,9 @@ export default {
         },
 
         click(event) {
-
+            if(this.selected === true){
+                this.$emit('unset')
+            }
         },
 
         dblClick(event) {
