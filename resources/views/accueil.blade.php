@@ -11,30 +11,23 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-<a class="navbar-brand" href="#">Navbar</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+<nav class="navbar navbar-expand-md fixed-top" style="background-color: #E9E6E6;">
+
+
+    <img src="/image/logo1.png" width="70" height="50" />
 
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="#">Acceuil<span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Conseil<span target="_blank" class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Schéma<span target="_blank" class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown01">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+    </div>
     </li>
   </ul>
 
@@ -79,7 +72,7 @@
 <div class="jumbotrons">
   <div class="containers">
     <h1 class="display-3">
-    <p>Quel es la marque de votre matériel informatique ?</p></h1>
+    <p>Quelle est la marque de votre matériel informatique ?</p></h1>
     <select name="year_subject" id="year_subject">
   <option value="theme1"><nav>Cisco</nav></option>
   <option value="theme2"><nav>fortinet</nav></option>
