@@ -2188,6 +2188,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
+function openModal(routeur) {
+  $('#configModal').modal("show");
+}
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'app',
   components: {
@@ -2278,8 +2283,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img.onload = function () {
                   var widthImage = Math.sqrt(Math.pow(_this2.elements[finId].x - _this2.elements[departId].x, 2) + Math.pow(_this2.elements[finId].y - _this2.elements[departId].y, 2));
                   var scale = widthImage / img.width;
-                  var angle = 90 - Math.abs(_this2.elements[finId].x - _this2.elements[departId].x) / Math.abs(_this2.elements[finId].y - _this2.elements[departId].y);
-                  angle = -1 * angle;
+                  var angle = Math.atan((_this2.elements[finId].y - _this2.elements[departId].y) / (_this2.elements[finId].x - _this2.elements[departId].x)) * 180 / 3.14;
+                  console.log(_this2.elements[finId].y - _this2.elements[departId].y);
+                  console.log(_this2.elements[finId].x - _this2.elements[departId].x);
                   var item = {
                     id: id,
                     x: _this2.elements[departId].x,
@@ -2320,6 +2326,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img.src = "/assets/routeur.png";
                 idnext = _this3.elements.length;
                 console.log(idnext);
+                openModal("routeur");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2341,7 +2348,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 5:
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -2361,6 +2368,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img = new Image();
                 img.src = "/assets/pc.png";
                 id = _this4.elements.length;
+                openModal("PC");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2381,7 +2389,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context4.stop();
             }
@@ -2400,6 +2408,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 img = new Image();
                 img.src = "/assets/serveur.png";
+                openModal("serveur");
                 id = _this5.elements.length;
 
                 img.onload = function () {
@@ -2421,7 +2430,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context5.stop();
             }
@@ -2441,6 +2450,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img = new Image();
                 img.src = "/assets/switch.png";
                 id = _this6.elements.length;
+                openModal("switch");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2461,7 +2471,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context6.stop();
             }
@@ -2481,6 +2491,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img = new Image();
                 img.src = "/assets/modem.png";
                 id = _this7.elements.length;
+                openModal("modem");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2501,7 +2512,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context7.stop();
             }
@@ -2521,6 +2532,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 img = new Image();
                 img.src = "/assets/firewall.png";
                 id = _this8.elements.length;
+                openModal("firewall");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2541,7 +2553,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context8.stop();
             }
@@ -41470,25 +41482,6 @@ var render = function() {
                 },
                 [_vm._v(" Firewall ")]
               )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mt-5", attrs: { id: "lien-row" } }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-inline" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "linkApp form-control",
-                    on: { click: _vm.ajouterLien }
-                  },
-                  [_vm._v("faire un lien avec un élément ")]
-                )
-              ])
             ])
           ])
         ])

@@ -46,7 +46,7 @@
                                   <div class="col">
                                     <button v-on:click="ajouterServeur" id="ajouterServeur"></button>
                                   </div>
-                                  <div class="col">
+                                  <div class="col">tan
                                     <button v-on:click="ajouterSwitch" id="ajouterSwitch"></button>
                                   </div>
                                   <div class="col">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5" id="lien-row">
+<!--            <div class="row mt-5" id="lien-row">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
 
@@ -96,6 +96,10 @@
 
 <script>
 import FreeTransform from './components/Transform.vue'
+
+function openModal(routeur) {
+    $('#configModal').modal("show");
+}
 
 export default {
     name: 'app',
@@ -173,8 +177,9 @@ export default {
             img.onload = () => {
                 let widthImage = Math.sqrt( Math.pow(this.elements[finId].x - this.elements[departId].x, 2) + Math.pow(this.elements[finId].y - this.elements[departId].y, 2));
                 let scale = widthImage/img.width;
-                let angle= 90 - Math.abs(this.elements[finId].x-this.elements[departId].x) / Math.abs(this.elements[finId].y - this.elements[departId].y);
-                angle = -1 * angle;
+                let angle= Math.atan((this.elements[finId].y-this.elements[departId].y) / (this.elements[finId].x - this.elements[departId].x)) * 180/3.14;
+                console.log((this.elements[finId].y-this.elements[departId].y));
+                console.log((this.elements[finId].x - this.elements[departId].x));
                 let item = {
                     id: id,
                     x: this.elements[departId].x,
@@ -201,6 +206,8 @@ export default {
             let idnext = this.elements.length;
             console.log(idnext);
 
+            openModal("routeur");
+
 
             img.onload = () => {
                 console.log(`the image dimensions are ${img.width}x${img.height}`);
@@ -226,6 +233,8 @@ export default {
             img.src = "/assets/pc.png";
             let id = this.elements.length;
 
+            openModal("PC");
+
             img.onload = () => {
                 console.log(`the image dimensions are ${img.width}x${img.height}`);
                 this.elements.push({
@@ -248,6 +257,8 @@ export default {
             let img = new Image();
 
             img.src = "/assets/serveur.png";
+
+            openModal("serveur");
 
             let id = this.elements.length;
 
@@ -275,6 +286,7 @@ export default {
 
             img.src = "/assets/switch.png";
             let id = this.elements.length;
+            openModal("switch");
 
 
 
@@ -302,6 +314,8 @@ export default {
             img.src = "/assets/modem.png";
             let id = this.elements.length;
 
+            openModal("modem");
+
 
 
             img.onload = () => {
@@ -327,6 +341,8 @@ export default {
 
             img.src = "/assets/firewall.png";
             let id = this.elements.length;
+
+            openModal("firewall");
 
 
 
