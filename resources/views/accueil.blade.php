@@ -53,14 +53,24 @@
     background-color: darkgray;
 }
 </style>
+
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div  id="app"></div>
+
+            </div>
+        </div>
+    </div>
   <div class="container">
     <h2 class="display-3">Question 1 : </h1>
     <p>Comment est votre adressage IP  ?
 
     <p>adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
-    
+
    </p>
    <p> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
@@ -83,7 +93,7 @@
   <input class="btn btn-primary btn-lg" type="submit" value="Envoyer le formulaire">
 
 
-</select> 
+</select>
 
   </div>
 </div>
