@@ -2165,6 +2165,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'app',
@@ -2176,7 +2198,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       elements: [],
       offsetX: 0,
       offsetY: 0,
-      selectedElement: null
+      selectedElement: null,
+      ajoutLien: false,
+      deuxiemeSelected: null
     };
   },
   mounted: function mounted() {
@@ -2201,41 +2225,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, styles);
     },
     setSelected: function setSelected(id) {
-      this.selectedElement = id;
+      if (this.ajoutLien) {
+        this.ajoutLien = false;
+        this.deuxiemeSelected = id;
+        $('lien-row').hide();
+        this.confirmationLien();
+      } else {
+        this.selectedElement = id;
+        $('#lien-row').show();
+      }
     },
-    ajouterRouteur: function ajouterRouteur() {
+    unsetElement: function unsetElement(id) {
+      this.selectedElement = -1;
+      $('#lien-row').hide();
+    },
+    ajouterLien: function ajouterLien() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var img, id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                img = new Image();
-                img.src = "/assets/routeur.png";
-                id = Math.random() * 1000;
+                _this.ajoutLien = true;
 
-                img.onload = function () {
-                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
-
-                  _this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width + 10,
-                    height: img.height + 5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click'
-                  });
-                };
-
-              case 4:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -2243,39 +2257,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    ajouterPC: function ajouterPC() {
+    confirmationLien: function confirmationLien() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var img, id;
+        var img, id, departId, finId;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/pc.png";
-                id = Math.random() * 1000;
+                img.src = "/assets/lien.png";
+                id = _this2.elements.length;
+                departId = _this2.selectedElement;
+                console.log(_this2.deuxiemeSelected);
+                finId = _this2.deuxiemeSelected;
+                console.log(departId);
+                console.log(finId);
 
                 img.onload = function () {
-                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
-
-                  _this2.elements.push({
+                  var widthImage = Math.sqrt(Math.pow(_this2.elements[finId].x - _this2.elements[departId].x, 2) + Math.pow(_this2.elements[finId].y - _this2.elements[departId].y, 2));
+                  var scale = widthImage / img.width;
+                  var angle = 90 - Math.abs(_this2.elements[finId].x - _this2.elements[departId].x) / Math.abs(_this2.elements[finId].y - _this2.elements[departId].y);
+                  angle = -1 * angle;
+                  var item = {
                     id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width + 10,
-                    height: img.height + 5,
-                    angle: 0,
+                    x: _this2.elements[departId].x,
+                    y: _this2.elements[departId].y,
+                    scaleX: 0.01,
+                    scaleY: 0.01,
+                    width: widthImage + 5,
+                    height: 20,
+                    angle: angle,
                     classPrefix: "tr",
                     cheminImage: img.src,
                     text: "",
-                    selectOn: 'click'
-                  });
+                    selectOn: 'mousedown'
+                  };
+                  console.log(item);
+
+                  _this2.elements.push(item);
                 };
 
-              case 4:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -2283,24 +2307,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2);
       }))();
     },
-    ajouterServeur: function ajouterServeur() {
+    ajouterRouteur: function ajouterRouteur() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var img, id;
+        var img, idnext;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/serveur.png";
-                id = Math.random() * 1000;
+                img.src = "/assets/routeur.png";
+                idnext = _this3.elements.length;
+                console.log(idnext);
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
 
                   _this3.elements.push({
-                    id: id,
+                    key: idnext,
+                    id: idnext,
                     x: 400,
                     y: 300,
                     scaleX: 1,
@@ -2311,11 +2337,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     classPrefix: "tr",
                     cheminImage: img.src,
                     text: "",
-                    selectOn: 'click'
+                    selectOn: 'mousedown'
                   });
                 };
 
-              case 4:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -2323,7 +2349,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-    ajouterSwitch: function ajouterSwitch() {
+    ajouterPC: function ajouterPC() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -2333,8 +2359,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context4.prev = _context4.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/switch.png";
-                id = Math.random() * 1000;
+                img.src = "/assets/pc.png";
+                id = _this4.elements.length;
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2363,7 +2389,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee4);
       }))();
     },
-    ajouterModem: function ajouterModem() {
+    ajouterServeur: function ajouterServeur() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -2373,8 +2399,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context5.prev = _context5.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/modem.png";
-                id = Math.random() * 1000;
+                img.src = "/assets/serveur.png";
+                id = _this5.elements.length;
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2403,7 +2429,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee5);
       }))();
     },
-    ajouterFirewall: function ajouterFirewall() {
+    ajouterSwitch: function ajouterSwitch() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
@@ -2413,8 +2439,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context6.prev = _context6.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/firewall.png";
-                id = Math.random() * 1000;
+                img.src = "/assets/switch.png";
+                id = _this6.elements.length;
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2441,6 +2467,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee6);
+      }))();
+    },
+    ajouterModem: function ajouterModem() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var img, id;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                img = new Image();
+                img.src = "/assets/modem.png";
+                id = _this7.elements.length;
+
+                img.onload = function () {
+                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
+
+                  _this7.elements.push({
+                    id: id,
+                    x: 400,
+                    y: 300,
+                    scaleX: 1,
+                    scaleY: 1,
+                    width: img.width + 10,
+                    height: img.height + 5,
+                    angle: 0,
+                    classPrefix: "tr",
+                    cheminImage: img.src,
+                    text: "",
+                    selectOn: 'click'
+                  });
+                };
+
+              case 4:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    ajouterFirewall: function ajouterFirewall() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var img, id;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                img = new Image();
+                img.src = "/assets/firewall.png";
+                id = _this8.elements.length;
+
+                img.onload = function () {
+                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
+
+                  _this8.elements.push({
+                    id: id,
+                    x: 400,
+                    y: 300,
+                    scaleX: 1,
+                    scaleY: 1,
+                    width: img.width + 10,
+                    height: img.height + 5,
+                    angle: 0,
+                    classPrefix: "tr",
+                    cheminImage: img.src,
+                    text: "",
+                    selectOn: 'click'
+                  });
+                };
+
+              case 4:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     }
   }
@@ -2499,10 +2605,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Transform',
   props: {
+    id: {
+      type: Number,
+      required: false
+    },
     classPrefix: {
       type: String,
       "default": "tr"
@@ -2678,20 +2789,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       document.addEventListener('mouseup', up);
     },
     mousedown: function mousedown(event) {
-      this.$emit("mousedown", event);
+      this.$emit("mousedown", event); //this.$emit('click', event)
 
-      if (this.selectOn === 'mousedown' || this.selected === true) {
+      /*     if(this.selected === false){
+               this.$emit('onSelect')
+           }
+      */
+
+      if (this.selected === true) {
+        this.$emit('unset');
+      } else if (this.selectOn === 'mousedown' || this.selected === false) {
         this.$emit('onSelect');
         this.handleTranslation(event);
       }
     },
-    click: function click(event) {
-      this.$emit('click', event);
-
-      if (this.selectOn === 'click') {
-        this.$emit('onSelect');
-      }
-    },
+    click: function click(event) {},
     dblClick: function dblClick(event) {
       this.$emit('dblclick', event);
 
@@ -19143,7 +19255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\n    display: flex;\n    background: #F8FAFC;\n}\n.wrapper {\n    flex: 1;\n}\n.workspace {\n    width: 800px;\n    height: 800px;\n    margin: 25px auto;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);\n    border: 1px solid rgba(0, 0, 0, 0.10);\n    background: #fff;\n}\n* {\n    box-sizing: border-box;\n}\n.tr-transform--active {\n    position: absolute;\n    z-index: 5;\n}\n.tr-transform__content {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.tr-transform__content .element{\n    padding:5px;\n}\n.tr-transform__rotator {\n    top: -45px;\n    left: calc(50% - 7px);\n}\n.tr-transform__rotator,\n.tr-transform__scale-point {\n    background: #fff;\n    width: 15px;\n    height: 15px;\n    border-radius: 50%;\n    position: absolute;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n    border: 1px solid rgba(0, 0, 0, 0.1);\n    cursor: pointer;\n}\n.tr-transform__rotator:hover,\n.tr-transform__scale-point:hover {\n    background: #F1F5F8;\n}\n.tr-transform__rotator:active,\n.tr-transform__scale-point:active {\n    background: #DAE1E7;\n}\n.tr-transform__scale-point {\n}\n.tr-transform__scale-point--tl {\n    top: -7px;\n    left: -7px;\n}\n.tr-transform__scale-point--ml {\n    top: calc(50% - 7px);\n    left: -7px;\n}\n.tr-transform__scale-point--tr {\n    left: calc(100% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--tm {\n    left: calc(50% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--mr {\n    left: calc(100% - 7px);\n    top: calc(50% - 7px);\n}\n.tr-transform__scale-point--bl {\n    left: -7px;\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--bm {\n    left: calc(50% - 7px);\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--br {\n    left: calc(100% - 7px);\n    top: calc(100% - 7px);\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\n    display: flex;\n    background: #F8FAFC;\n}\n.wrapper {\n    flex: 1;\n}\n.workspace {\n    width: 800px;\n    height: 800px;\n    margin: 25px auto;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);\n    border: 1px solid rgba(0, 0, 0, 0.10);\n    background: #fff;\n}\n* {\n    box-sizing: border-box;\n}\n.tr-transform--active {\n    position: absolute;\n    z-index: 5;\n}\n.tr-transform__content {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.tr-transform__content .element{\n    padding:5px;\n}\n.linkApp:hover{\n    color: blue;\n    text-decoration: underline;\n}\n.tr-transform__rotator {\n    top: -45px;\n    left: calc(50% - 7px);\n}\n.tr-transform__rotator,\n.tr-transform__scale-point {\n    background: #fff;\n    width: 15px;\n    height: 15px;\n    border-radius: 50%;\n    position: absolute;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n    border: 1px solid rgba(0, 0, 0, 0.1);\n    cursor: pointer;\n}\n.tr-transform__rotator:hover,\n.tr-transform__scale-point:hover {\n    background: #F1F5F8;\n}\n.tr-transform__rotator:active,\n.tr-transform__scale-point:active {\n    background: #DAE1E7;\n}\n.tr-transform__scale-point {\n}\n.tr-transform__scale-point--tl {\n    top: -7px;\n    left: -7px;\n}\n.tr-transform__scale-point--ml {\n    top: calc(50% - 7px);\n    left: -7px;\n}\n.tr-transform__scale-point--tr {\n    left: calc(100% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--tm {\n    left: calc(50% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--mr {\n    left: calc(100% - 7px);\n    top: calc(50% - 7px);\n}\n.tr-transform__scale-point--bl {\n    left: -7px;\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--bm {\n    left: calc(50% - 7px);\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--br {\n    left: calc(100% - 7px);\n    top: calc(100% - 7px);\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41242,18 +41354,21 @@ var render = function() {
                   angle: element.angle,
                   "offset-x": _vm.offsetX,
                   "offset-y": _vm.offsetY,
-                  "disable-scale": element.disableScale === true,
+                  "disable-scale": false,
                   selected: element.id === _vm.selectedElement,
                   selectOn: element.selectOn,
                   styles: {
                     zIndex: element.id === _vm.selectedElement ? 2 : 1
                   },
-                  "aspect-ratio": false,
-                  "scale-from-center": false
+                  "aspect-ratio": true,
+                  "scale-from-center": true
                 },
                 on: {
                   onSelect: function($event) {
                     return _vm.setSelected(element.id)
+                  },
+                  unset: function($event) {
+                    return _vm.unsetElement()
                   },
                   update: function($event) {
                     return _vm.update(element.id, $event)
@@ -41279,46 +41394,103 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterRouteur" },
-            on: { click: _vm.ajouterRouteur }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterPC" },
-            on: { click: _vm.ajouterPC }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterServeur" },
-            on: { click: _vm.ajouterServeur }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterSwitch" },
-            on: { click: _vm.ajouterSwitch }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterModem" },
-            on: { click: _vm.ajouterModem }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("button", {
-            attrs: { id: "ajouterFirewall" },
-            on: { click: _vm.ajouterFirewall }
-          })
+        _c("div", { staticClass: "container pt-5" }, [
+          _c("div", { staticClass: "row pb-2" }, [
+            _c("div", { staticClass: "col-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterRouteur" },
+                  on: { click: _vm.ajouterRouteur }
+                },
+                [_vm._v(" Routeur ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterPC" },
+                  on: { click: _vm.ajouterPC }
+                },
+                [_vm._v(" PC ")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row pb-2" }, [
+            _c("div", { staticClass: "col-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterServeur" },
+                  on: { click: _vm.ajouterServeur }
+                },
+                [_vm._v(" Serveur ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterSwitch" },
+                  on: { click: _vm.ajouterSwitch }
+                },
+                [_vm._v(" Switch ")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row pb-2" }, [
+            _c("div", { staticClass: "col-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterModem" },
+                  on: { click: _vm.ajouterModem }
+                },
+                [_vm._v(" Modem ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "ajouterFirewall" },
+                  on: { click: _vm.ajouterFirewall }
+                },
+                [_vm._v(" Firewall ")]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-5", attrs: { id: "lien-row" } }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-inline" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "linkApp form-control",
+                    on: { click: _vm.ajouterLien }
+                  },
+                  [_vm._v("faire un lien avec un élément ")]
+                )
+              ])
+            ])
+          ])
         ])
       ])
     ])
@@ -41366,7 +41538,11 @@ var render = function() {
           class: _vm.classPrefix + "-transform__content",
           style: _vm.computedStyles.element
         },
-        [_vm._t("default")],
+        [
+          _vm._t("default", function() {
+            return [_vm._v(_vm._s(_vm.id))]
+          })
+        ],
         2
       ),
       _vm._v(" "),

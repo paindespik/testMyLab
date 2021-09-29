@@ -15,14 +15,15 @@
                         :angle="element.angle"
                         :offset-x="offsetX"
                         :offset-y="offsetY"
-                        :disable-scale="element.disableScale === true"
+                        :disable-scale=false
                         :selected="element.id === selectedElement"
                         :selectOn="element.selectOn"
                         @onSelect="setSelected(element.id)"
+                        @unset="unsetElement()"
                         @update="update(element.id,$event)"
                         :styles="{zIndex:element.id === selectedElement?2:1}"
-                        :aspect-ratio="false"
-                        :scale-from-center="false"
+                        :aspect-ratio="true"
+                        :scale-from-center="true"
                     >
                         <div class="element"
                              :style="getElementStyles(element)">
@@ -34,41 +35,62 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <button v-on:click="ajouterRouteur" id="ajouterRouteur"></button>
+                <div class="container pt-5">
+                    <div class="row pb-2">
+                        <div class="col-lg">
+                            <button v-on:click="ajouterRouteur" id="ajouterRouteur" class="form-control"> Routeur </button>
+                        </div>
+                        <!--          <div class="col">
+                                    <button v-on:click="ajouterPC" id="ajouterPC"></button>
+                                  </div>
+                                  <div class="col">
+                                    <button v-on:click="ajouterServeur" id="ajouterServeur"></button>
+                                  </div>
+                                  <div class="col">
+                                    <button v-on:click="ajouterSwitch" id="ajouterSwitch"></button>
+                                  </div>
+                                  <div class="col">
+                                    <button v-on:click="ajouterModem" id="ajouterModem"></button>
+                                  </div>
+                                  <div class="col">
+                                    <button v-on:click="ajouterFirewall" id="ajouterFirewall"></button>
+                                  </div>-->
+                        <div class="col-lg">
+                            <button v-on:click="ajouterPC" id="ajouterPC" class="form-control"> PC </button>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-lg">
+                            <button v-on:click="ajouterServeur" id="ajouterServeur" class="form-control"> Serveur </button>
+                        </div>
+                        <div class="col-lg">
+                            <button v-on:click="ajouterSwitch" id="ajouterSwitch" class="form-control"> Switch </button>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-lg">
+                            <button v-on:click="ajouterModem" id="ajouterModem" class="form-control"> Modem </button>
+                        </div>
+                        <div class="col">
+                            <button v-on:click="ajouterFirewall" id="ajouterFirewall" class="form-control"> Firewall </button>
+                        </div>
+                    </div>
                 </div>
-                <!--          <div class="col">
-                            <button v-on:click="ajouterPC" id="ajouterPC"></button>
-                          </div>
-                          <div class="col">
-                            <button v-on:click="ajouterServeur" id="ajouterServeur"></button>
-                          </div>
-                          <div class="col">
-                            <button v-on:click="ajouterSwitch" id="ajouterSwitch"></button>
-                          </div>
-                          <div class="col">
-                            <button v-on:click="ajouterModem" id="ajouterModem"></button>
-                          </div>
-                          <div class="col">
-                            <button v-on:click="ajouterFirewall" id="ajouterFirewall"></button>
-                          </div>-->
-                <div class="col">
-                    <button v-on:click="ajouterPC" id="ajouterPC"></button>
-                </div>
-                <div class="col">
-                    <button v-on:click="ajouterServeur" id="ajouterServeur"></button>
-                </div>
-                <div class="col">
-                    <button v-on:click="ajouterSwitch" id="ajouterSwitch"></button>
-                </div>
-                <div class="col">
-                    <button v-on:click="ajouterModem" id="ajouterModem"></button>
-                </div>
-                <div class="col">
-                    <button v-on:click="ajouterFirewall" id="ajouterFirewall"></button>
+            </div>
+            <div class="row mt-5" id="lien-row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-inline">
+                                <button v-on:click="ajouterLien" class="linkApp form-control" >faire un lien avec un élément </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 </template>
 
@@ -85,7 +107,9 @@ export default {
             elements: [],
             offsetX: 0,
             offsetY: 0,
-            selectedElement: null
+            selectedElement: null,
+            ajoutLien: false,
+            deuxiemeSelected: null
         }
     },
     mounted() {
@@ -113,18 +137,76 @@ export default {
             }
         },
         setSelected(id) {
-            this.selectedElement = id
+            if(this.ajoutLien){
+                this.ajoutLien = false;
+                this.deuxiemeSelected = id;
+                $('lien-row').hide();
+                this.confirmationLien();
+            }
+            else{
+                this.selectedElement = id
+                $('#lien-row').show();
+            }
+
         },
+        unsetElement(id) {
+            this.selectedElement = -1
+            $('#lien-row').hide();
+        },
+
+        async ajouterLien(){
+
+
+            this.ajoutLien = true;
+
+        },
+
+        async confirmationLien(){
+            let img = new Image();
+            img.src = "/assets/lien.png";
+            let id = this.elements.length;
+            let departId = this.selectedElement;
+            console.log(this.deuxiemeSelected);
+            let finId = this.deuxiemeSelected;
+            console.log(departId);
+            console.log(finId);
+            img.onload = () => {
+                let widthImage = Math.sqrt( Math.pow(this.elements[finId].x - this.elements[departId].x, 2) + Math.pow(this.elements[finId].y - this.elements[departId].y, 2));
+                let scale = widthImage/img.width;
+                let angle= 90 - Math.abs(this.elements[finId].x-this.elements[departId].x) / Math.abs(this.elements[finId].y - this.elements[departId].y);
+                angle = -1 * angle;
+                let item = {
+                    id: id,
+                    x: this.elements[departId].x,
+                    y: this.elements[departId].y,
+                    scaleX: 0.01,
+                    scaleY: 0.01,
+                    width: widthImage+5,
+                    height: 20,
+                    angle: angle,
+                    classPrefix: "tr",
+                    cheminImage: img.src,
+                    text: "",
+                    selectOn: 'mousedown',
+                };
+                console.log(item);
+                this.elements.push(item);
+            }
+        },
+
         async ajouterRouteur() {
             let img = new Image();
 
             img.src = "/assets/routeur.png";
-            let id = Math.random() * 1000;
+            let idnext = this.elements.length;
+            console.log(idnext);
+
 
             img.onload = () => {
                 console.log(`the image dimensions are ${img.width}x${img.height}`);
                 this.elements.push({
-                    id: id,
+                    key: idnext,
+                    id: idnext,
                     x: 400,
                     y: 300,
                     scaleX: 1,
@@ -135,16 +217,14 @@ export default {
                     classPrefix: "tr",
                     cheminImage: img.src,
                     text: "",
-                    selectOn: 'click',
+                    selectOn: 'mousedown',
                 });
             }
         },
         async ajouterPC() {
             let img = new Image();
-
             img.src = "/assets/pc.png";
-            let id = Math.random() * 1000;
-
+            let id = this.elements.length;
 
             img.onload = () => {
                 console.log(`the image dimensions are ${img.width}x${img.height}`);
@@ -168,7 +248,8 @@ export default {
             let img = new Image();
 
             img.src = "/assets/serveur.png";
-            let id = Math.random() * 1000;
+
+            let id = this.elements.length;
 
 
             img.onload = () => {
@@ -193,7 +274,8 @@ export default {
             let img = new Image();
 
             img.src = "/assets/switch.png";
-            let id = Math.random() * 1000;
+            let id = this.elements.length;
+
 
 
             img.onload = () => {
@@ -218,7 +300,8 @@ export default {
             let img = new Image();
 
             img.src = "/assets/modem.png";
-            let id = Math.random() * 1000;
+            let id = this.elements.length;
+
 
 
             img.onload = () => {
@@ -243,7 +326,8 @@ export default {
             let img = new Image();
 
             img.src = "/assets/firewall.png";
-            let id = Math.random() * 1000;
+            let id = this.elements.length;
+
 
 
             img.onload = () => {
@@ -301,6 +385,12 @@ export default {
 }
 .tr-transform__content .element{
     padding:5px;
+}
+
+
+.linkApp:hover{
+    color: blue;
+    text-decoration: underline;
 }
 
 .tr-transform__rotator {

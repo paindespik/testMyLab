@@ -5,8 +5,9 @@
          @dblclick="dblClick"
          @mousedown="mousedown">
         <div :class="`${classPrefix}-transform__content`" :style="computedStyles.element">
-            <slot></slot>
+            <slot>{{id}}</slot>
         </div>
+
         <div v-if="selected"
              :class="`${classPrefix}-transform__controls`"
              :style="computedStyles.controls">
@@ -37,6 +38,10 @@ import {styler, scale, translate, rotate} from 'free-transform'
 export default {
     name: 'Transform',
     props: {
+        id: {
+            type: Number,
+            required: false
+        },
         classPrefix: {
             type: String,
             default: "tr",
@@ -215,17 +220,23 @@ export default {
 
         mousedown(event) {
             this.$emit("mousedown", event);
-            if (this.selectOn === 'mousedown' || this.selected === true) {
+            //this.$emit('click', event)
+           /*     if(this.selected === false){
+                    this.$emit('onSelect')
+                }
+*/
+            if(this.selected === true){
+                this.$emit('unset')
+            }
+            else if (this.selectOn === 'mousedown' || this.selected === false) {
                 this.$emit('onSelect')
                 this.handleTranslation(event)
             }
+
         },
 
         click(event) {
-            this.$emit('click', event)
-            if (this.selectOn === 'click') {
-                this.$emit('onSelect')
-            }
+
         },
 
         dblClick(event) {

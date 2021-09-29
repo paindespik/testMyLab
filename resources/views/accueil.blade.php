@@ -109,6 +109,7 @@
 <script src="{{ url('/') }}/assets/js/jquery-3.6.0.min.js"></script>
 <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ url('/') }}/assets/js/scriptJS.js"></script>
 
 </html>
 
