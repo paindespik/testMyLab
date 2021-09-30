@@ -15,14 +15,14 @@
 
 
     <img src="/image/logo1.png" width="70" height="50" />
-
+    <div class
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="bouton1" href="#">Acceuil<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="bouton2" target="_blank" href="/conseil">Conseil<span  class="sr-only">(current)</span></a>
+                <a class="bouton2" target="_blank" href="#">Conseil<span  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="bouton3" target="_blank" href="#">Schéma<span  class="sr-only">(current)</span></a>
@@ -60,16 +60,15 @@
 </style>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-
-    <div class="container">
+<div class="ju="container">
         <div class="row">
             <div class="col">
-                <div  id="app"></div>
 
             </div>
         </div>
     </div>
+
+  <hr>
 <style>
 .id{
    width: 90%;
@@ -84,30 +83,12 @@
 }
 </style>
 
-  <!--
-  <script>
-    $("#year_subjects").change(function(){
-    $.ajax({
-        url: "employees",
-        type: "post",
-        data: { id : $(this).val() },
-        success: function(data){
-            $("#employees").html(data);
-        }
-    });
-});
-  </script>
-  -->
-
+  
 <div class="jumbotrons">
   <div class="containers">
 
 
   </div>
-</div>
-<div class="container">
-
-</div> <!-- /container -->
 </div>
 
 </main>
