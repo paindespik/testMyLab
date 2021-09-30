@@ -79,26 +79,42 @@
 </style>
     <div class="card">
   <div class="card-header">
-    Questionnaire pour infrastructure 
+    Questionnaire pour votre infrastructure 
   </div>
+  <!--
+  <script>
+    $("#year_subjects").change(function(){
+    $.ajax({
+        url: "employees",
+        type: "post",
+        data: { id : $(this).val() },
+        success: function(data){
+            $("#employees").html(data);
+        }
+    });
+});
+  </script>
+  -->
   <div class="card-body">
     <p class="card-title texts">Comment est votre adressage IP ?</p>
+    @section('contenu')
     <select class="form-control" name="year_subjects" id="year_subjects">
       <option type="checkbox" value="reseau" id="reseau"><nav>Adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</nav></option>
       <option  type="checkbox" value="reseaux" id="reseaux"><nav>adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</nav></option>
     </select>
+    @endsection
     <hr class="id">
-    <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
+    <a  class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
 
   </div>
 </div>
 <hr>
 <div class="card">
   <div class="card-header" id="blah" class="hidden">
-    Question 2
+    Questionnaire pour le matériel de votre entreprise
   </div>
   <div class="card-body">
-    <p class="texts">Quel es la marque de votre matériel informatique ?</p>
+    <p class="texts">Quelles sont les marques utiliser pour votre matériel informatique ?</p>
     <select class="form-control" name="year_subject" id="year_subject">
   <option value="theme1" id="cisco"><nav>Cisco</nav></option>
   <option value="theme2" id="fortinet"><nav>fortinet</nav></option>

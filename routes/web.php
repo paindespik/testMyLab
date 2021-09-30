@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ use App\Http\Controllers\AccueilController;
 });*/
 Route::get('/', 'App\Http\Controllers\AccueilController@Accueil')->name('Accueil');
 
+
+Route::get('forms', [FormController::class, 'create']);
+Route::post('forms', [FormController::class, 'store']);
