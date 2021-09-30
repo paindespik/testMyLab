@@ -19,13 +19,13 @@
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Acceuil<span class="sr-only">(current)</span></a>
+      <a class="bouton1" href="#">Acceuil<span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Conseil<span target="_blank" class="sr-only">(current)</span></a>
+      <a class="bouton2" href="#">Conseil<span target="_blank" class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Schéma<span target="_blank" class="sr-only">(current)</span></a>
+      <a class="bouton3" href="#">Schéma<span target="_blank" class="sr-only">(current)</span></a>
     </li>
     </div>
     </li>
@@ -35,6 +35,15 @@
 </nav>
 <main role="main">
 <style>
+.bouton1{
+  margin-left: 50px;
+}
+.bouton2{
+  margin-left: 50px;
+}
+.bouton3{
+  margin-left: 50px;
+}
 .container{
     text-align: center;
 }
@@ -91,10 +100,10 @@
   </div>
 </div>
 <div class="container">
-  <!-- Example row of columns -->
+
   <hr>
 
-</div> <!-- /container -->
+</div> 
 
 </main>
 </body>
