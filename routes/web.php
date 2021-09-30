@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccueilController;
-
+use App\Http\Controllers\ConseilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +18,4 @@ use App\Http\Controllers\AccueilController;
     return view('welcome');
 });*/
 Route::get('/accueil', 'App\Http\Controllers\AccueilController@Accueil')->name('Accueil');
-
+Route::GET('/conseil','App\Http\Controllers\ConseilController@Conseil')->name('Conseil');
