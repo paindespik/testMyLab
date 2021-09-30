@@ -76,7 +76,8 @@
 
 adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
     <p class="card-text"> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
+
   </div>
 </div>
 <hr>
@@ -96,9 +97,8 @@ adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
   <option value="theme6"><nav>dell</nav></option>
   <option value="theme7"><nav>ibm</nav></option>
   <option value="theme8"><nav>autre</nav></option>
-  <a href="#" class="btn btn-primary">Go somewhere</a>
 
-  <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le formulaire"></a>a
+  <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le deuxieme formulaire"></a>
 
 
 </select>
