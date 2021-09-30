@@ -88,7 +88,7 @@ adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
   <div class="card-body">
     <h1 class="display-3">
     <p>Quel es la marque de votre matériel informatique ?</p></h1>
-    <select name="year_subject" id="year_subject">
+    <select class="form-control" name="year_subject" id="year_subject">
   <option value="theme1"><nav>Cisco</nav></option>
   <option value="theme2"><nav>fortinet</nav></option>
   <option value="theme3"><nav>alcatel lucent</nav></option>
