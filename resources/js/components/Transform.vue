@@ -220,23 +220,23 @@ export default {
 
         mousedown(event) {
             this.$emit("mousedown", event);
-            //this.$emit('click', event)
-           /*     if(this.selected === false){
+            // this.$emit('click', event);
+/*                if(this.selected === false){
                     this.$emit('onSelect')
-                }
-*/
+                }*/
 
             if (this.selected === false) {
                 this.$emit('onSelect')
                 this.handleTranslation(event)
             }
+            else if(this.selected === true){
+                this.$emit('unset')
+            }
 
         },
 
         click(event) {
-            if(this.selected === true){
-                this.$emit('unset')
-            }
+
         },
 
         dblClick(event) {

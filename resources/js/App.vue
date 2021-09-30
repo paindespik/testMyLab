@@ -77,17 +77,17 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="row mt-5" id="lien-row">
+            <div class="row mt-5" id="supprimerElement">
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class="form-inline">
-                                <button v-on:click="ajouterLien" class="linkApp form-control" >faire un lien avec un élément </button>
+                                <button v-on:click="supprimerElement" class="linkApp form-control" >Supprimer l'élément </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </div>
 
 
@@ -97,7 +97,30 @@
 <script>
 import FreeTransform from './components/Transform.vue'
 
-function openModal(routeur) {
+function openModal(type) {
+    if (type === "routeur"){
+        $('#labelQestion1').text("voulez vous mettre en place un DHCP?");
+        $('#divQuestion2').hide();
+    }
+    else if (type === "PC"){
+        $('#labelQestion1').text("Vos mots de passe respectent ils les normes demandées? Minimum 12 caractères avec des majuscule, minuscules, chiffres et caractères spéciaux");
+        $('#divQuestion2').hide();
+    }
+    else if (type === "serveur"){
+        $('#labelQestion1').text("avez-vous une salle climatisé pour vos serveurs?");
+        $('#divQuestion2').show();
+        $('#labelQestion2').text("avez-vous 1 active directory? ");
+    }
+    else if (type === "switch"){
+        $('#labelQestion1').text("votre protocole spanning tree est-il activé ? ");
+        $('#divQuestion2').show();
+        $('#labelQestion2').text("utilisez-vous la fibre entre vos switch ? ");
+    }
+    else if (type === "PC"){
+        $('#labelQestion1').text("avez-vous désactivé le protocole HTTP ? (port 80)");
+        $('#divQuestion2').show();
+        $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
+    }
     $('#configModal').modal("show");
 }
 
@@ -141,28 +164,13 @@ export default {
             }
         },
         setSelected(id) {
-            if(this.ajoutLien){
-                this.ajoutLien = false;
-                this.deuxiemeSelected = id;
-                $('lien-row').hide();
-                this.confirmationLien();
-            }
-            else{
-                this.selectedElement = id
-                $('#lien-row').show();
-            }
+            this.selectedElement = id
+            $('#supprimerElement').show();
 
         },
         unsetElement(id) {
             this.selectedElement = -1
-            $('#lien-row').hide();
-        },
-
-        async ajouterLien(){
-
-
-            this.ajoutLien = true;
-
+            $('#supprimerElement').hide();
         },
 
         async confirmationLien(){
@@ -197,6 +205,13 @@ export default {
                 console.log(item);
                 this.elements.push(item);
             }
+        },
+
+        supprimerElement(){
+            this.elements.splice(this.selectedElement, 1);
+            console.log(this.elements);
+
+            this.unsetElement(this.selectedElement);
         },
 
         async ajouterRouteur() {

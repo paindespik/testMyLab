@@ -118,20 +118,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
+                    <div id="divQuestion1">
+                        <label id="labelQestion1" for="question1"></label>
+                        <select class="form-control" id="question1">
+                            <option selected disabled>choisissez... </option>
+                            <option>Oui</option>
+                            <option>Non</option>
+                        </select>
+                    </div>
+
+                    <div id="divQuestion2">
+                        <label id="labelQestion2" for="question2"></label>
+                        <select class="form-control" id="question2">
+                            <option selected disabled>choisissez... </option>
+                            <option>Oui</option>
+                            <option>Non</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ajouter</button>
                 </div>
             </div>
         </div>

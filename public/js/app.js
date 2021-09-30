@@ -2189,7 +2189,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-function openModal(routeur) {
+function openModal(type) {
+  if (type === "routeur") {
+    $('#labelQestion1').text("voulez vous mettre en place un DHCP?");
+    $('#divQuestion2').hide();
+  } else if (type === "PC") {
+    $('#labelQestion1').text("Vos mots de passe respectent ils les normes demandées? Minimum 12 caractères avec des majuscule, minuscules, chiffres et caractères spéciaux");
+    $('#divQuestion2').hide();
+  } else if (type === "serveur") {
+    $('#labelQestion1').text("avez-vous une salle climatisé pour vos serveurs?");
+    $('#divQuestion2').show();
+    $('#labelQestion2').text("avez-vous 1 active directory? ");
+  } else if (type === "switch") {
+    $('#labelQestion1').text("votre protocole spanning tree est-il activé ? ");
+    $('#divQuestion2').show();
+    $('#labelQestion2').text("utilisez-vous la fibre entre vos switch ? ");
+  } else if (type === "PC") {
+    $('#labelQestion1').text("avez-vous désactivé le protocole HTTP ? (port 80)");
+    $('#divQuestion2').show();
+    $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
+  }
+
   $('#configModal').modal("show");
 }
 
@@ -2230,66 +2250,41 @@ function openModal(routeur) {
       }, styles);
     },
     setSelected: function setSelected(id) {
-      if (this.ajoutLien) {
-        this.ajoutLien = false;
-        this.deuxiemeSelected = id;
-        $('lien-row').hide();
-        this.confirmationLien();
-      } else {
-        this.selectedElement = id;
-        $('#lien-row').show();
-      }
+      this.selectedElement = id;
+      $('#supprimerElement').show();
     },
     unsetElement: function unsetElement(id) {
       this.selectedElement = -1;
-      $('#lien-row').hide();
+      $('#supprimerElement').hide();
     },
-    ajouterLien: function ajouterLien() {
+    confirmationLien: function confirmationLien() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var img, id, departId, finId;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.ajoutLien = true;
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    confirmationLien: function confirmationLien() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var img, id, departId, finId;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
                 img = new Image();
                 img.src = "/assets/lien.png";
-                id = _this2.elements.length;
-                departId = _this2.selectedElement;
-                console.log(_this2.deuxiemeSelected);
-                finId = _this2.deuxiemeSelected;
+                id = _this.elements.length;
+                departId = _this.selectedElement;
+                console.log(_this.deuxiemeSelected);
+                finId = _this.deuxiemeSelected;
                 console.log(departId);
                 console.log(finId);
 
                 img.onload = function () {
-                  var widthImage = Math.sqrt(Math.pow(_this2.elements[finId].x - _this2.elements[departId].x, 2) + Math.pow(_this2.elements[finId].y - _this2.elements[departId].y, 2));
+                  var widthImage = Math.sqrt(Math.pow(_this.elements[finId].x - _this.elements[departId].x, 2) + Math.pow(_this.elements[finId].y - _this.elements[departId].y, 2));
                   var scale = widthImage / img.width;
-                  var angle = Math.atan((_this2.elements[finId].y - _this2.elements[departId].y) / (_this2.elements[finId].x - _this2.elements[departId].x)) * 180 / 3.14;
-                  console.log(_this2.elements[finId].y - _this2.elements[departId].y);
-                  console.log(_this2.elements[finId].x - _this2.elements[departId].x);
+                  var angle = Math.atan((_this.elements[finId].y - _this.elements[departId].y) / (_this.elements[finId].x - _this.elements[departId].x)) * 180 / 3.14;
+                  console.log(_this.elements[finId].y - _this.elements[departId].y);
+                  console.log(_this.elements[finId].x - _this.elements[departId].x);
                   var item = {
                     id: id,
-                    x: _this2.elements[departId].x,
-                    y: _this2.elements[departId].y,
+                    x: _this.elements[departId].x,
+                    y: _this.elements[departId].y,
                     scaleX: 0.01,
                     scaleY: 0.01,
                     width: widthImage + 5,
@@ -2302,36 +2297,41 @@ function openModal(routeur) {
                   };
                   console.log(item);
 
-                  _this2.elements.push(item);
+                  _this.elements.push(item);
                 };
 
               case 9:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     },
+    supprimerElement: function supprimerElement() {
+      this.elements.splice(this.selectedElement, 1);
+      console.log(this.elements);
+      this.unsetElement(this.selectedElement);
+    },
     ajouterRouteur: function ajouterRouteur() {
-      var _this3 = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var img, idnext;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 img = new Image();
                 img.src = "/assets/routeur.png";
-                idnext = _this3.elements.length;
+                idnext = _this2.elements.length;
                 console.log(idnext);
                 openModal("routeur");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
 
-                  _this3.elements.push({
+                  _this2.elements.push({
                     key: idnext,
                     id: idnext,
                     x: 400,
@@ -2350,13 +2350,54 @@ function openModal(routeur) {
 
               case 6:
               case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    ajouterPC: function ajouterPC() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var img, id;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                img = new Image();
+                img.src = "/assets/pc.png";
+                id = _this3.elements.length;
+                openModal("PC");
+
+                img.onload = function () {
+                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
+
+                  _this3.elements.push({
+                    id: id,
+                    x: 400,
+                    y: 300,
+                    scaleX: 1,
+                    scaleY: 1,
+                    width: img.width + 10,
+                    height: img.height + 5,
+                    angle: 0,
+                    classPrefix: "tr",
+                    cheminImage: img.src,
+                    text: "",
+                    selectOn: 'click'
+                  });
+                };
+
+              case 5:
+              case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
       }))();
     },
-    ajouterPC: function ajouterPC() {
+    ajouterServeur: function ajouterServeur() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -2366,9 +2407,9 @@ function openModal(routeur) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/pc.png";
+                img.src = "/assets/serveur.png";
+                openModal("serveur");
                 id = _this4.elements.length;
-                openModal("PC");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2397,7 +2438,7 @@ function openModal(routeur) {
         }, _callee4);
       }))();
     },
-    ajouterServeur: function ajouterServeur() {
+    ajouterSwitch: function ajouterSwitch() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -2407,9 +2448,9 @@ function openModal(routeur) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/serveur.png";
-                openModal("serveur");
+                img.src = "/assets/switch.png";
                 id = _this5.elements.length;
+                openModal("switch");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2438,7 +2479,7 @@ function openModal(routeur) {
         }, _callee5);
       }))();
     },
-    ajouterSwitch: function ajouterSwitch() {
+    ajouterModem: function ajouterModem() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
@@ -2448,9 +2489,9 @@ function openModal(routeur) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/switch.png";
+                img.src = "/assets/modem.png";
                 id = _this6.elements.length;
-                openModal("switch");
+                openModal("modem");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2479,7 +2520,7 @@ function openModal(routeur) {
         }, _callee6);
       }))();
     },
-    ajouterModem: function ajouterModem() {
+    ajouterFirewall: function ajouterFirewall() {
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
@@ -2489,9 +2530,9 @@ function openModal(routeur) {
             switch (_context7.prev = _context7.next) {
               case 0:
                 img = new Image();
-                img.src = "/assets/modem.png";
+                img.src = "/assets/firewall.png";
                 id = _this7.elements.length;
-                openModal("modem");
+                openModal("firewall");
 
                 img.onload = function () {
                   console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
@@ -2518,47 +2559,6 @@ function openModal(routeur) {
             }
           }
         }, _callee7);
-      }))();
-    },
-    ajouterFirewall: function ajouterFirewall() {
-      var _this8 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var img, id;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                img = new Image();
-                img.src = "/assets/firewall.png";
-                id = _this8.elements.length;
-                openModal("firewall");
-
-                img.onload = function () {
-                  console.log("the image dimensions are ".concat(img.width, "x").concat(img.height));
-
-                  _this8.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width + 10,
-                    height: img.height + 5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click'
-                  });
-                };
-
-              case 5:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8);
       }))();
     }
   }
@@ -2801,23 +2801,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       document.addEventListener('mouseup', up);
     },
     mousedown: function mousedown(event) {
-      this.$emit("mousedown", event); //this.$emit('click', event)
+      this.$emit("mousedown", event); // this.$emit('click', event);
 
-      /*     if(this.selected === false){
-               this.$emit('onSelect')
-           }
-      */
+      /*                if(this.selected === false){
+                          this.$emit('onSelect')
+                      }*/
 
       if (this.selected === false) {
         this.$emit('onSelect');
         this.handleTranslation(event);
-      }
-    },
-    click: function click(event) {
-      if (this.selected === true) {
+      } else if (this.selected === true) {
         this.$emit('unset');
       }
     },
+    click: function click(event) {},
     dblClick: function dblClick(event) {
       this.$emit('dblclick', event);
 
@@ -41487,7 +41484,30 @@ var render = function() {
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row mt-5", attrs: { id: "supprimerElement" } },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col" }, [
+                _c("div", { staticClass: "form-inline" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "linkApp form-control",
+                      on: { click: _vm.supprimerElement }
+                    },
+                    [_vm._v("Supprimer l'élément ")]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
     ])
   ])
 }
