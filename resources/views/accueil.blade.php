@@ -11,37 +11,40 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-<a class="navbar-brand" href="#">Navbar</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+<nav class="navbar navbar-expand-md fixed-top" style="background-color: #E9E6E6;">
 
-<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown01">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
-  </ul>
 
-</div>
+    <img src="/image/logo1.png" width="70" height="50" />
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="bouton1" href="#">Acceuil<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="bouton2" target="_blank" href="#">Conseil<span  class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="bouton3" target="_blank" href="#">Schéma<span  class="sr-only">(current)</span></a>
+            </li>
+    </div>
+    </li>
+    </ul>
+
+    </div>
 </nav>
 <main role="main">
 <style>
+
+    .bouton1{
+        margin-left: 50px;
+    }
+    .bouton2{
+        margin-left: 50px;
+    }
+    .bouton3{
+        margin-left: 50px;
+    }
 .container{
     text-align: center;
 }
@@ -65,27 +68,19 @@
             </div>
         </div>
     </div>
-  
-  <hr>
-    <div class="card">
-  <div class="card-header">
-    Questionnaire pour infrastructure 
-  </div>
-  <div class="card-body">
-    <p class="card-title">Comment est votre adressage IP ?
+  <div class="container">
+    <h2 class="display-3">Question 1 : </h2>
+    <p>Comment est votre adressage IP  ?
 
-adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
-    <p class="card-text"> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
-    <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
+    <p>adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
 
+   </p>
+   <p> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
   </div>
 </div>
-<hr>
-<div class="card">
-  <div class="card-header">
-    Question 2
-  </div>
-  <div class="card-body">
+<div class="jumbotrons">
+  <div class="containers">
     <h1 class="display-3">
     <p>Quel es la marque de votre matériel informatique ?</p></h1>
     <select class="form-control" name="year_subject" id="year_subject">
@@ -98,63 +93,19 @@ adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
   <option value="theme7"><nav>ibm</nav></option>
   <option value="theme8"><nav>autre</nav></option>
 
-  <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le deuxieme formulaire"></a>
+  <input class="btn btn-primary btn-lg" type="submit" value="Envoyer le formulaire">
+
+
+
 
 
 </select>
-  </div>
-</div>
-<div class="jumbotrons">
-  <div class="containers">
-   
 
   </div>
 </div>
 <div class="container">
-  
+
 </div> <!-- /container -->
-
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
-
-    <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="divQuestion1">
-                        <label id="labelQestion1" for="question1"></label>
-                        <select class="form-control" id="question1">
-                            <option selected disabled>choisissez... </option>
-                            <option>Oui</option>
-                            <option>Non</option>
-                        </select>
-                    </div>
-
-                    <div id="divQuestion2">
-                        <label id="labelQestion2" for="question2"></label>
-                        <select class="form-control" id="question2">
-                            <option selected disabled>choisissez... </option>
-                            <option>Oui</option>
-                            <option>Non</option>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ajouter</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </main>
 </body>
@@ -162,7 +113,6 @@ adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
 <script src="{{ url('/') }}/assets/js/jquery-3.6.0.min.js"></script>
 <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ url('/') }}/assets/js/scriptJS.js"></script>
 
 </html>
 

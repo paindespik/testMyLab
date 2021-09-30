@@ -38,7 +38,7 @@
                 <div class="container pt-5">
                     <div class="row pb-2">
                         <div class="col-lg">
-                            <button v-on:click="ajouterRouteur" id="ajouterRouteur" class="form-control"> Routeur </button>
+                            <button v-on:click="openModal('routeur');" id="ajouterRouteur" class="form-control"> Routeur </button>
                         </div>
                         <!--          <div class="col">
                                     <button v-on:click="ajouterPC" id="ajouterPC"></button>
@@ -56,38 +56,123 @@
                                     <button v-on:click="ajouterFirewall" id="ajouterFirewall"></button>
                                   </div>-->
                         <div class="col-lg">
-                            <button v-on:click="ajouterPC" id="ajouterPC" class="form-control"> PC </button>
+                            <button v-on:click="openModal('PC');" id="ajouterPC" class="form-control"> PC </button>
                         </div>
                     </div>
                     <div class="row pb-2">
                         <div class="col-lg">
-                            <button v-on:click="ajouterServeur" id="ajouterServeur" class="form-control"> Serveur </button>
+                            <button v-on:click="openModal('serveur');" id="ajouterServeur" class="form-control"> Serveur </button>
                         </div>
                         <div class="col-lg">
-                            <button v-on:click="ajouterSwitch" id="ajouterSwitch" class="form-control"> Switch </button>
+                            <button v-on:click="openModal('switch')" id="ajouterSwitch" class="form-control"> Switch </button>
                         </div>
                     </div>
                     <div class="row pb-2">
                         <div class="col-lg">
-                            <button v-on:click="ajouterModem" id="ajouterModem" class="form-control"> Modem </button>
+                            <button v-on:click="openModal('modem')" id="ajouterModem" class="form-control"> Modem </button>
                         </div>
                         <div class="col">
-                            <button v-on:click="ajouterFirewall" id="ajouterFirewall" class="form-control"> Firewall </button>
+                            <button v-on:click="openModal('firewall')" id="ajouterFirewall" class="form-control"> Firewall </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-5" id="supprimerElement">
+            <div class="row mt-5" >
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class="form-inline">
-                                <button v-on:click="supprimerElement" class="linkApp form-control" >Supprimer l'élément </button>
+                                <button id="supprimerElement" style="display: none" v-on:click="supprimerElement" class="linkApp form-control" >Supprimer l'élément </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row mt-5" >
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-inline">
+                                <button id="faireLigne" style="display: none" v-on:click="faireLien" class="linkApp form-control" >Faire un lien </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 15rem" id="appliquer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8 offset-2">
+                            <div class="form-inline">
+                                <button v-on:click="appliquer" class="btn btn-primary linkApp form-control"> Confirmer le shemas </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Configuration du matériel</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divQuestion1">
+                                <label id="labelQestion1" for="question1"></label>
+                                <select class="form-control" id="question1">
+                                    <option value="0" selected>choisissez... </option>
+                                    <option value="1">Oui</option>
+                                    <option value="2">Non</option>
+                                </select>
+                            </div>
+                            <input type="hidden" id="typeElement">
+                            <div id="divQuestion2">
+                                <label id="labelQestion2" for="question2"></label>
+                                <select class="form-control" id="question2">
+                                    <option value="0" selected>choisissez... </option>
+                                    <option value="1" >Oui</option>
+                                    <option value="2" >Non</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                            <button type="button" v-on:click="ajouter()" id="confirmationAjout" class="btn btn-primary" data-dismiss="modal">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="appliquermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmer votre infrastructure réseau</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-primary" v-on="Resultat" data-dismiss="modal">Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 
@@ -96,33 +181,6 @@
 
 <script>
 import FreeTransform from './components/Transform.vue'
-
-function openModal(type) {
-    if (type === "routeur"){
-        $('#labelQestion1').text("voulez vous mettre en place un DHCP?");
-        $('#divQuestion2').hide();
-    }
-    else if (type === "PC"){
-        $('#labelQestion1').text("Vos mots de passe respectent ils les normes demandées? Minimum 12 caractères avec des majuscule, minuscules, chiffres et caractères spéciaux");
-        $('#divQuestion2').hide();
-    }
-    else if (type === "serveur"){
-        $('#labelQestion1').text("avez-vous une salle climatisé pour vos serveurs?");
-        $('#divQuestion2').show();
-        $('#labelQestion2').text("avez-vous 1 active directory? ");
-    }
-    else if (type === "switch"){
-        $('#labelQestion1').text("votre protocole spanning tree est-il activé ? ");
-        $('#divQuestion2').show();
-        $('#labelQestion2').text("utilisez-vous la fibre entre vos switch ? ");
-    }
-    else if (type === "PC"){
-        $('#labelQestion1').text("avez-vous désactivé le protocole HTTP ? (port 80)");
-        $('#divQuestion2').show();
-        $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
-    }
-    $('#configModal').modal("show");
-}
 
 export default {
     name: 'app',
@@ -144,6 +202,47 @@ export default {
         this.offsetY = this.$refs.workspace.offsetTop
     },
     methods: {
+
+        Resultat(){
+
+        },
+        openModal(type) {
+            $('#typeElement').val(type);
+            if (type === "routeur"){
+                $('#labelQestion1').text("voulez vous mettre en place un DHCP?");
+                $('#divQuestion2').hide();
+            }
+            else if (type === "PC"){
+                $('#labelQestion1').text("Vos mots de passe respectent ils les normes demandées? Minimum 12 caractères avec des majuscule, minuscules, chiffres et caractères spéciaux");
+                $('#typeElement').val("pc");
+                $('#divQuestion2').hide();
+            }
+            else if (type === "serveur"){
+                $('#labelQestion1').text("avez-vous une salle climatisé pour vos serveurs?");
+                $('#divQuestion2').show();
+                $('#labelQestion2').text("avez-vous 1 active directory? ");
+            }
+            else if (type === "switch"){
+                $('#labelQestion1').text("votre protocole spanning tree est-il activé ? ");
+                $('#divQuestion2').show();
+                $('#labelQestion2').text("utilisez-vous la fibre entre vos switch ? ");
+            }
+            else if(type === "modem"){
+                this.ajouter();
+            }
+            else if (type === "firewall"){
+                $('#labelQestion1').text("avez-vous désactivé le protocole HTTP ? (port 80)");
+                $('#divQuestion2').show();
+                $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
+            }
+            $('#configModal').modal("show");
+        },
+        appliquer(){
+          $('#appliquermodal').modal('show');
+        },
+        faireLien(){
+            this.ajoutLien = true;
+        },
         update(id, payload) {
             this.elements = this.elements.map(item => {
                 if (item.id === id) {
@@ -164,8 +263,17 @@ export default {
             }
         },
         setSelected(id) {
-            this.selectedElement = id
-            $('#supprimerElement').show();
+
+            if (this.ajoutLien){
+                this.deuxiemeSelected = id;
+                this.confirmationLien();
+            }
+            else{
+                this.selectedElement = id;
+                $('#supprimerElement').show();
+                $('#faireLigne').show();
+            }
+
 
         },
         unsetElement(id) {
@@ -186,10 +294,11 @@ export default {
                 let widthImage = Math.sqrt( Math.pow(this.elements[finId].x - this.elements[departId].x, 2) + Math.pow(this.elements[finId].y - this.elements[departId].y, 2));
                 let scale = widthImage/img.width;
                 let angle= Math.atan((this.elements[finId].y-this.elements[departId].y) / (this.elements[finId].x - this.elements[departId].x)) * 180/3.14;
-                console.log((this.elements[finId].y-this.elements[departId].y));
-                console.log((this.elements[finId].x - this.elements[departId].x));
                 let item = {
                     id: id,
+                    response1 : 0,
+                    response2 : 0,
+                    typeElement: "lien",
                     x: this.elements[departId].x,
                     y: this.elements[departId].y,
                     scaleX: 0.01,
@@ -204,7 +313,9 @@ export default {
                 };
                 console.log(item);
                 this.elements.push(item);
+
             }
+            this.ajoutLien = false;
         },
 
         supprimerElement(){
@@ -214,20 +325,25 @@ export default {
             this.unsetElement(this.selectedElement);
         },
 
-        async ajouterRouteur() {
+        async ajouter() {
+
+            let reponse1 = parseInt($('#question1').val());
+            let reponse2 = parseInt($('#question2').val());
             let img = new Image();
+            let element = $('#typeElement').val();
 
-            img.src = "/assets/routeur.png";
+            img.src = "/assets/"+ element +".png";
             let idnext = this.elements.length;
-            console.log(idnext);
 
-            openModal("routeur");
+            $('#faireLigne').show();
 
 
             img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
+                let nouveau = {
                     key: idnext,
+                    response1 : reponse1,
+                    response2 : reponse2,
+                    typeElement: element,
                     id: idnext,
                     x: 400,
                     y: 300,
@@ -240,145 +356,13 @@ export default {
                     cheminImage: img.src,
                     text: "",
                     selectOn: 'mousedown',
-                });
+                };
+                console.log(nouveau);
+                this.elements.push(nouveau);
             }
-        },
-        async ajouterPC() {
-            let img = new Image();
-            img.src = "/assets/pc.png";
-            let id = this.elements.length;
-
-            openModal("PC");
-
-            img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width+10,
-                    height: img.height+5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click',
-                });
-            }
-        },
-        async ajouterServeur() {
-            let img = new Image();
-
-            img.src = "/assets/serveur.png";
-
-            openModal("serveur");
-
-            let id = this.elements.length;
-
-
-            img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width+10,
-                    height: img.height+5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click',
-                });
-            }
-        },
-        async ajouterSwitch() {
-            let img = new Image();
-
-            img.src = "/assets/switch.png";
-            let id = this.elements.length;
-            openModal("switch");
-
-
-
-            img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width+10,
-                    height: img.height+5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click',
-                });
-            }
-        },
-        async ajouterModem() {
-            let img = new Image();
-
-            img.src = "/assets/modem.png";
-            let id = this.elements.length;
-
-            openModal("modem");
-
-
-
-            img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width+10,
-                    height: img.height+5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click',
-                });
-            }
-        },
-        async ajouterFirewall() {
-            let img = new Image();
-
-            img.src = "/assets/firewall.png";
-            let id = this.elements.length;
-
-            openModal("firewall");
-
-
-
-            img.onload = () => {
-                console.log(`the image dimensions are ${img.width}x${img.height}`);
-                this.elements.push({
-                    id: id,
-                    x: 400,
-                    y: 300,
-                    scaleX: 1,
-                    scaleY: 1,
-                    width: img.width+10,
-                    height: img.height+5,
-                    angle: 0,
-                    classPrefix: "tr",
-                    cheminImage: img.src,
-                    text: "",
-                    selectOn: 'click',
-                });
-            }
-        },
+            $('#question1').val("0");
+            $('#question2').val("0");
+        }
     }
 }
 </script>

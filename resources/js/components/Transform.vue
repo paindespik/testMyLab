@@ -38,6 +38,18 @@ import {styler, scale, translate, rotate} from 'free-transform'
 export default {
     name: 'Transform',
     props: {
+        reponse1:{
+          type: Number,
+          required: true,
+        },
+        reponse2: {
+            type: Number,
+            required: true,
+        },
+        typeElement: {
+            type: String,
+            required: true
+        },
         id: {
             type: Number,
             required: false
@@ -114,7 +126,7 @@ export default {
         },
         scaleFromCenter: {
             type: Boolean,
-            default: true
+            default: false
         },
     },
     computed: {
