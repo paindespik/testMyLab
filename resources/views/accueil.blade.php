@@ -25,7 +25,7 @@
                 <a class="bouton2" target="_blank" href="/conseil">Conseil<span  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="bouton3" target="_blank" href="#">Schéma<span  class="sr-only">(current)</span></a>
+                <a class="bouton3" target="_blank" href="/schema">Schéma<span  class="sr-only">(current)</span></a>
             </li>
     </div>
     </li>

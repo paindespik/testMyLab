@@ -19,4 +19,4 @@ use App\Http\Controllers\ConseilController;
 });*/
 Route::get('/accueil', 'App\Http\Controllers\AccueilController@Accueil')->name('Accueil');
 Route::GET('/conseil','App\Http\Controllers\ConseilController@Conseil')->name('Conseil');
-Route::GET('/schema','App\Http\Controllers\ShemaController@Schema')->name('Schema');
+Route::GET('/schema','App\Http\Controllers\SchemaController@Schema')->name('Schema');
