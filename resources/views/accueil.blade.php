@@ -45,9 +45,7 @@
 .container{
     text-align: center;
 }
-.display-3{
-    color: darkblue;
-}
+
 .containers{
     text-align: center;
     background-color: darkgray;
@@ -67,22 +65,24 @@
     </div>
   
   <hr>
+
     <div class="card">
-  <div class="card-header">
+  <div class="card-header" id="d1">
     Questionnaire pour infrastructure 
   </div>
   <div class="card-body">
-    <p class="card-title">Comment est votre adressage IP ?
-
-adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
-    <p class="card-text"> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
+    <p class="card-title">Comment est votre adressage IP ?</p>
+    <select class="form-control" name="year_subjects" id="year_subjects">
+      <option type="checkbox" value="reseau"><nav>Adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</nav></option>
+      <option value="theme2"><nav>adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</nav></option>
+    </select>
     <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
 
   </div>
 </div>
 <hr>
 <div class="card">
-  <div class="card-header">
+  <div class="card-header" id="blah" class="hidden">
     Question 2
   </div>
   <div class="card-body">
