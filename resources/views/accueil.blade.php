@@ -65,19 +65,26 @@
             </div>
         </div>
     </div>
-  <div class="container">
-    <h2 class="display-3">Question 1 : </h1>
-    <p>Comment est votre adressage IP  ?
+  
+  <hr>
+    <div class="card">
+  <div class="card-header">
+    Questionnaire pour infrastructure 
+  </div>
+  <div class="card-body">
+    <p class="card-title">Comment est votre adressage IP ?
 
-    <p>adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
-
-   </p>
-   <p> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
+    <p class="card-text"> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
-<div class="jumbotrons">
-  <div class="containers">
+<hr>
+<div class="card">
+  <div class="card-header">
+    Question 2
+  </div>
+  <div class="card-body">
     <h1 class="display-3">
     <p>Quel es la marque de votre matériel informatique ?</p></h1>
     <select name="year_subject" id="year_subject">
@@ -89,18 +96,22 @@
   <option value="theme6"><nav>dell</nav></option>
   <option value="theme7"><nav>ibm</nav></option>
   <option value="theme8"><nav>autre</nav></option>
+  <a href="#" class="btn btn-primary">Go somewhere</a>
 
-  <input class="btn btn-primary btn-lg" type="submit" value="Envoyer le formulaire">
+  <a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le formulaire"></a>a
 
 
 </select>
+  </div>
+</div>
+<div class="jumbotrons">
+  <div class="containers">
+   
 
   </div>
 </div>
 <div class="container">
-  <!-- Example row of columns -->
-  <hr>
-
+  
 </div> <!-- /container -->
 
 </main>
