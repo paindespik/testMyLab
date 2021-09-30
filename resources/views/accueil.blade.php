@@ -33,6 +33,7 @@
 
     </div>
 </nav>
+
 <main role="main">
 <style>
 
@@ -45,12 +46,13 @@
     .bouton3{
         margin-left: 50px;
     }
-.container{
-    text-align: center;
-}
-.display-3{
-    color: darkblue;
-}
+    .container{
+        text-align: center;
+    }
+    .display-3{
+        color: darkblue;
+    }
+
 .containers{
     text-align: center;
     background-color: darkgray;
@@ -68,38 +70,77 @@
             </div>
         </div>
     </div>
-  <div class="container">
-    <h2 class="display-3">Question 1 : </h2>
-    <p>Comment est votre adressage IP  ?
 
-    <p>adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</p>
+  <hr>
+<style>
+.id{
+   width: 90%;
+    border: 0;
+    height: 1px;
+    background: #000;
+    opacity: 0;
+}
 
-   </p>
-   <p> adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+.texts{
+    font-weight: bold;
+}
+</style>
+    <div class="card">
+  <div class="card-header">
+    Questionnaire pour votre infrastructure
+  </div>
+  <!--
+  <script>
+    $("#year_subjects").change(function(){
+    $.ajax({
+        url: "employees",
+        type: "post",
+        data: { id : $(this).val() },
+        success: function(data){
+            $("#employees").html(data);
+        }
+    });
+});
+  </script>
+  -->
+  <div class="card-body">
+    <p class="card-title texts">Comment est votre adressage IP ?</p>
+    <select class="form-control" name="year_subjects" id="year_subjects">
+      <option type="checkbox" value="reseau" id="reseau"><nav>Adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</nav></option>
+      <option  type="checkbox" value="reseaux" id="reseaux"><nav>adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</nav></option>
+    </select>
+    <hr class="id">
+    <a  class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
+
+  </div>
+</div>
+<hr>
+<div class="card">
+  <div class="card-header" id="blah" class="hidden">
+    Questionnaire pour le matériel de votre entreprise
+  </div>
+  <div class="card-body">
+    <p class="texts">Quelles sont les marques utiliser pour votre matériel informatique ?</p>
+    <select class="form-control" name="year_subject" id="year_subject">
+  <option value="theme1" id="cisco"><nav>Cisco</nav></option>
+  <option value="theme2" id="fortinet"><nav>fortinet</nav></option>
+  <option value="theme3" id="alcatellucent"><nav>alcatel lucent</nav></option>
+  <option value="theme4" id="netgear"><nav>netgear</nav></option>
+  <option value="theme5" id="hp"><nav>hp</nav></option>
+  <option value="theme6" id="dell"><nav>dell</nav></option>
+  <option value="theme7" id="ibm"><nav>ibm</nav></option>
+  <option value="theme8" id="autre"><nav>autre</nav></option>
+
+
+</select>
+<hr class="id">
+<a href="#" class="btn btn-primary"><input class="btn btn-primary" type="submit" value="Envoyer le premier formulaire"></a>
+
   </div>
 </div>
 <div class="jumbotrons">
   <div class="containers">
-    <h1 class="display-3">
-    <p>Quel es la marque de votre matériel informatique ?</p></h1>
-    <select class="form-control" name="year_subject" id="year_subject">
-  <option value="theme1"><nav>Cisco</nav></option>
-  <option value="theme2"><nav>fortinet</nav></option>
-  <option value="theme3"><nav>alcatel lucent</nav></option>
-  <option value="theme4"><nav>netgear</nav></option>
-  <option value="theme5"><nav>hp</nav></option>
-  <option value="theme6"><nav>dell</nav></option>
-  <option value="theme7"><nav>ibm</nav></option>
-  <option value="theme8"><nav>autre</nav></option>
 
-  <input class="btn btn-primary btn-lg" type="submit" value="Envoyer le formulaire">
-
-
-
-
-
-</select>
 
   </div>
 </div>
