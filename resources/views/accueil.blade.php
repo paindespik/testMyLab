@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="bouton1" href="#">Acceuil<span class="sr-only">(current)</span></a>
+                <a class="bouton1" href="#">Accueil<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="bouton2" target="_blank" href="/conseil">Conseil<span  class="sr-only">(current)</span></a>
