@@ -140,6 +140,11 @@
                                 </select>
                             </div>
 
+
+
+
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
@@ -154,19 +159,94 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirmer votre infrastructure réseau</h5>
+                            <h5 class="modal-title" id="labelModal">Confirmer votre infrastructure réseau</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <div class="card" id="q1">
+                                <div class="card-header">
+                                    Questionnaire pour votre infrastructure
+                                </div>
+                            <div class="card-body">
+                                <p class="card-title texts">Comment est votre adressage IP ?</p>
+                                <select class="form-control" name="year_subjects" id="q1rep">
+                                    <option type="checkbox" value="1" id="reseau"><nav>Adresse Sectorisé (différent plage d'adresse séparé par des VLAN)</nav></option>
+                                    <option  type="checkbox" value="2" id="reseaux"><nav>adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)</nav></option>
+                                </select>
+                                <hr class="id">
+
+                            </div>
+                                </div>
+                            <div class="card" id="q2" style="display: none">
+                                <div class="card-header">
+                                    Questionnaire pour le matériel de votre entreprise
+                                </div>
+                                <div class="card-body">
+                                    <p class="texts">Quelles sont les marques utiliser pour votre matériel informatique ?</p>
+                                    <select class="form-control" name="year_subject" id="q2rep">
+                                        <option value="theme1" id="cisco"><nav>Cisco</nav></option>
+                                        <option value="theme2" id="fortinet"><nav>fortinet</nav></option>
+                                        <option value="theme3" id="alcatellucent"><nav>alcatel lucent</nav></option>
+                                        <option value="theme4" id="netgear"><nav>netgear</nav></option>
+                                        <option value="theme5" id="hp"><nav>hp</nav></option>
+                                        <option value="theme6" id="dell"><nav>dell</nav></option>
+                                        <option value="theme7" id="ibm"><nav>ibm</nav></option>
+                                        <option value="theme8" id="autre"><nav>autre</nav></option>
 
 
-
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="rep1" style="display: none" >
+                                il vaudrais mieux mettre vos adresses en commune
+                                <hr>
+                            </div>
+                            <div id="rep2" style="display: none">
+                                Si vous avez autre qu'un cisco il faut que vous vérifié si vous avez le spanning tree activé
+                                <hr>
+                            </div>
+                            <div id="rep3" style="display: none">
+                                L'avantage du spanning tree protocole est d'éviter les boucles ou tempête de broadcast au sein du réseau et donc de garantir la continuité de service de ce dernier.
+                                <hr>
+                            </div>
+                            <div id="rep4" style="display: none">
+                                Afin d'avoir la meilleure communication entre deux routeurs, il est préconisé d'utiliser de la fibre.
+                                <hr>
+                            </div>
+                            <div id="rep5" style="display: none">
+                                il est préconisé de placer vos serveurs dans une salle fermé et climatisé afin de maintenir refroidit les serveurs et qu'ils ne surchauffent pas.
+                                <hr>
+                            </div>
+                            <div id="rep6" style="display: none">
+                                il vous faudrais un active directory sur vos postes de travail pour avoir une sécurité supplémentaire
+                                <hr>
+                            </div>
+                            <div id="rep7" style="display: none">
+                                il vous faudrais un mot de passe avec au moins 12 caractère
+                                <hr>
+                            </div>
+                            <div id="rep8" style="display: none">
+                                Il est nécessaire  déclare la totalité de vos VLAN sinon la communication ne pourra pas se faire entre le routeur et les machines de vos VLAN.
+                                <hr>
+                            </div>
+                            <div id="rep9" style="display: none">
+                                en tant que petite entité le DHCP est a privilégier pour les postes de travail, les tables de routages seront réservées aux équipements réseau (routeurs, switchs).
+                                <hr>
+                            </div>
+                            <div id="rep10" style="display: none">
+                                il faut désactiver le protocole HTTP car il n'est pas sécurisé, c'est à dire que si quelqu'un intercepte les données il verra tout apparent en clair.
+                                <hr>
+                            </div>
+                            <div id="rep11" style="display: none">
+                                Il faut désactiver le protocole telnet, ce protocole n'est pas sécurisé car il ne crypte pas les données
+                                <hr>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"  data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" v-on="Resultat" data-dismiss="modal">Confirmer</button>
+                            <button type="button" class="btn btn-secondary" v-on:click="annuler" data-dismiss="modal">Annuler</button>
+                            <button  class="btn btn-primary" v-on:click="suivant" > Suivant </button>
                         </div>
                     </div>
                 </div>
@@ -192,6 +272,7 @@ export default {
             elements: [],
             offsetX: 0,
             offsetY: 0,
+            tour: 1,
             selectedElement: null,
             ajoutLien: false,
             deuxiemeSelected: null
@@ -204,7 +285,54 @@ export default {
     methods: {
 
         Resultat(){
-
+            console.log("resultat")
+                if ($('#q1rep').val() === "1"){
+                    $('#rep1').show();
+                }
+                if ($('#q2rep').val() === "theme1"){
+                    $('#rep2').show();
+                }
+                this.elements.map(function(el, key){
+                    console.log(el);
+                    if (el.typeElement === "switch"){
+                        if (el.response1 === 2){
+                            $('#rep3').show();
+                        }
+                        if(el.response2 === 2){
+                            $('#rep4').show();
+                        }
+                    }
+                    else if (el.typeElement === "pc"){
+                        if (el.response1 === 2){
+                            $('#rep5').show();
+                        }
+                        if (el.response2 === 2){
+                            $('#rep6').show();
+                        }
+                    }
+                    else if (el.typeElement === "pc"){
+                        if (el.response1 === 2){
+                            $('#rep7').show();
+                        }
+                    }
+                    else if (el.typeElement === "routeur"){
+                        if (el.response1 === 2){
+                            $('#rep8').show();
+                        }
+                        if (el.response2 === 2){
+                            $('#rep9').show();
+                        }
+                    }
+                    else if (el.typeElement === "firewall"){
+                        if (el.response1 === 1){
+                            $('#rep10').show();
+                        }
+                        if (el.response2 === 2){
+                            $('#rep11').show();
+                        }
+                    }
+            })
+            $('#labelModal').text("Votre résultat");
         },
         openModal(type) {
             $('#typeElement').val(type);
@@ -235,10 +363,34 @@ export default {
                 $('#divQuestion2').show();
                 $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
             }
-            $('#configModal').modal("show");
+            if (type !== "modem"){
+                $('#configModal').modal("show");
+            }
+
+        },
+        annuler(){
+            $('#q1').show();
+            $('#q2').hide();
+            this.tour = 1;
         },
         appliquer(){
           $('#appliquermodal').modal('show');
+        },
+        suivant(){
+            if (this.tour < 2){
+                $('#q1').hide();
+                $('#q2').show();
+                this.tour = 2;
+            }
+            else if (this.tour === 2){
+                $('#q2').hide();
+                this.Resultat();
+                this.tour = 3;
+            }
+            else {
+                this.tour = 1;
+                $('#appliquermodal').modal('hide');
+            }
         },
         faireLien(){
             this.ajoutLien = true;
@@ -258,6 +410,7 @@ export default {
             const styles = element.styles ? element.styles : {}
             return {
                 width: `${element.width}px`,
+                overflow: "hidden",
                 height: `${element.height}px`,
                 ...styles
             }
@@ -301,8 +454,8 @@ export default {
                     typeElement: "lien",
                     x: this.elements[departId].x,
                     y: this.elements[departId].y,
-                    scaleX: 0.01,
-                    scaleY: 0.01,
+                    scaleX: 1,
+                    scaleY: 1,
                     width: widthImage+5,
                     height: 20,
                     angle: angle,
@@ -379,7 +532,7 @@ export default {
 
 .workspace {
     width: 800px;
-    height: 800px;
+    height: 700px;
     margin: 25px auto;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);
     border: 1px solid rgba(0, 0, 0, 0.10);

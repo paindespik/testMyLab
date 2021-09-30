@@ -40,15 +40,15 @@ export default {
     props: {
         reponse1:{
           type: Number,
-          required: true,
+          required: false,
         },
         reponse2: {
             type: Number,
-            required: true,
+            required: false,
         },
         typeElement: {
             type: String,
-            required: true
+            required: false
         },
         id: {
             type: Number,
@@ -122,7 +122,7 @@ export default {
         },
         aspectRatio: {
             type: Boolean,
-            default: true
+            default: false
         },
         scaleFromCenter: {
             type: Boolean,

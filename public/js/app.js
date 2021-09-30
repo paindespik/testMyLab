@@ -2272,6 +2272,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'app',
@@ -2283,6 +2363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       elements: [],
       offsetX: 0,
       offsetY: 0,
+      tour: 1,
       selectedElement: null,
       ajoutLien: false,
       deuxiemeSelected: null
@@ -2293,7 +2374,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.offsetY = this.$refs.workspace.offsetTop;
   },
   methods: {
-    Resultat: function Resultat() {},
+    Resultat: function Resultat() {
+      console.log("resultat");
+
+      if ($('#q1rep').val() === "1") {
+        $('#rep1').show();
+      }
+
+      if ($('#q2rep').val() === "theme1") {
+        $('#rep2').show();
+      }
+
+      this.elements.map(function (el, key) {
+        console.log(el);
+
+        if (el.typeElement === "switch") {
+          if (el.response1 === 2) {
+            $('#rep3').show();
+          }
+
+          if (el.response2 === 2) {
+            $('#rep4').show();
+          }
+        } else if (el.typeElement === "pc") {
+          if (el.response1 === 2) {
+            $('#rep5').show();
+          }
+
+          if (el.response2 === 2) {
+            $('#rep6').show();
+          }
+        } else if (el.typeElement === "pc") {
+          if (el.response1 === 2) {
+            $('#rep7').show();
+          }
+        } else if (el.typeElement === "routeur") {
+          if (el.response1 === 2) {
+            $('#rep8').show();
+          }
+
+          if (el.response2 === 2) {
+            $('#rep9').show();
+          }
+        } else if (el.typeElement === "firewall") {
+          if (el.response1 === 1) {
+            $('#rep10').show();
+          }
+
+          if (el.response2 === 2) {
+            $('#rep11').show();
+          }
+        }
+      });
+      $('#labelModal').text("Votre résultat");
+    },
     openModal: function openModal(type) {
       $('#typeElement').val(type);
 
@@ -2320,10 +2454,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         $('#labelQestion2').text("avez-vous désactivé le protocole telnet ? (Port 23)");
       }
 
-      $('#configModal').modal("show");
+      if (type !== "modem") {
+        $('#configModal').modal("show");
+      }
+    },
+    annuler: function annuler() {
+      $('#q1').show();
+      $('#q2').hide();
+      this.tour = 1;
     },
     appliquer: function appliquer() {
       $('#appliquermodal').modal('show');
+    },
+    suivant: function suivant() {
+      if (this.tour < 2) {
+        $('#q1').hide();
+        $('#q2').show();
+        this.tour = 2;
+      } else if (this.tour === 2) {
+        $('#q2').hide();
+        this.Resultat();
+        this.tour = 3;
+      } else {
+        this.tour = 1;
+        $('#appliquermodal').modal('hide');
+      }
     },
     faireLien: function faireLien() {
       this.ajoutLien = true;
@@ -2341,6 +2496,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var styles = element.styles ? element.styles : {};
       return _objectSpread({
         width: "".concat(element.width, "px"),
+        overflow: "hidden",
         height: "".concat(element.height, "px")
       }, styles);
     },
@@ -2387,8 +2543,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     typeElement: "lien",
                     x: _this.elements[departId].x,
                     y: _this.elements[departId].y,
-                    scaleX: 0.01,
-                    scaleY: 0.01,
+                    scaleX: 1,
+                    scaleY: 1,
                     width: widthImage + 5,
                     height: 20,
                     angle: angle,
@@ -2532,15 +2688,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     reponse1: {
       type: Number,
-      required: true
+      required: false
     },
     reponse2: {
       type: Number,
-      required: true
+      required: false
     },
     typeElement: {
       type: String,
-      required: true
+      required: false
     },
     id: {
       type: Number,
@@ -2616,7 +2772,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     aspectRatio: {
       type: Boolean,
-      "default": true
+      "default": false
     },
     scaleFromCenter: {
       type: Boolean,
@@ -19186,7 +19342,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\n    display: flex;\n    background: #F8FAFC;\n}\n.wrapper {\n    flex: 1;\n}\n.workspace {\n    width: 800px;\n    height: 800px;\n    margin: 25px auto;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);\n    border: 1px solid rgba(0, 0, 0, 0.10);\n    background: #fff;\n}\n* {\n    box-sizing: border-box;\n}\n.tr-transform--active {\n    position: absolute;\n    z-index: 5;\n}\n.tr-transform__content {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.tr-transform__content .element{\n    padding:5px;\n}\n.linkApp:hover{\n    color: blue;\n    text-decoration: underline;\n}\n.tr-transform__rotator {\n    top: -45px;\n    left: calc(50% - 7px);\n}\n.tr-transform__rotator,\n.tr-transform__scale-point {\n    background: #fff;\n    width: 15px;\n    height: 15px;\n    border-radius: 50%;\n    position: absolute;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n    border: 1px solid rgba(0, 0, 0, 0.1);\n    cursor: pointer;\n}\n.tr-transform__rotator:hover,\n.tr-transform__scale-point:hover {\n    background: #F1F5F8;\n}\n.tr-transform__rotator:active,\n.tr-transform__scale-point:active {\n    background: #DAE1E7;\n}\n.tr-transform__scale-point {\n}\n.tr-transform__scale-point--tl {\n    top: -7px;\n    left: -7px;\n}\n.tr-transform__scale-point--ml {\n    top: calc(50% - 7px);\n    left: -7px;\n}\n.tr-transform__scale-point--tr {\n    left: calc(100% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--tm {\n    left: calc(50% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--mr {\n    left: calc(100% - 7px);\n    top: calc(50% - 7px);\n}\n.tr-transform__scale-point--bl {\n    left: -7px;\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--bm {\n    left: calc(50% - 7px);\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--br {\n    left: calc(100% - 7px);\n    top: calc(100% - 7px);\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\n    display: flex;\n    background: #F8FAFC;\n}\n.wrapper {\n    flex: 1;\n}\n.workspace {\n    width: 800px;\n    height: 700px;\n    margin: 25px auto;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);\n    border: 1px solid rgba(0, 0, 0, 0.10);\n    background: #fff;\n}\n* {\n    box-sizing: border-box;\n}\n.tr-transform--active {\n    position: absolute;\n    z-index: 5;\n}\n.tr-transform__content {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.tr-transform__content .element{\n    padding:5px;\n}\n.linkApp:hover{\n    color: blue;\n    text-decoration: underline;\n}\n.tr-transform__rotator {\n    top: -45px;\n    left: calc(50% - 7px);\n}\n.tr-transform__rotator,\n.tr-transform__scale-point {\n    background: #fff;\n    width: 15px;\n    height: 15px;\n    border-radius: 50%;\n    position: absolute;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n    border: 1px solid rgba(0, 0, 0, 0.1);\n    cursor: pointer;\n}\n.tr-transform__rotator:hover,\n.tr-transform__scale-point:hover {\n    background: #F1F5F8;\n}\n.tr-transform__rotator:active,\n.tr-transform__scale-point:active {\n    background: #DAE1E7;\n}\n.tr-transform__scale-point {\n}\n.tr-transform__scale-point--tl {\n    top: -7px;\n    left: -7px;\n}\n.tr-transform__scale-point--ml {\n    top: calc(50% - 7px);\n    left: -7px;\n}\n.tr-transform__scale-point--tr {\n    left: calc(100% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--tm {\n    left: calc(50% - 7px);\n    top: -7px;\n}\n.tr-transform__scale-point--mr {\n    left: calc(100% - 7px);\n    top: calc(50% - 7px);\n}\n.tr-transform__scale-point--bl {\n    left: -7px;\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--bm {\n    left: calc(50% - 7px);\n    top: calc(100% - 7px);\n}\n.tr-transform__scale-point--br {\n    left: calc(100% - 7px);\n    top: calc(100% - 7px);\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41575,28 +41731,26 @@ var render = function() {
               _c("div", { staticClass: "modal-content" }, [
                 _vm._m(2),
                 _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
                   _c(
                     "button",
                     {
                       staticClass: "btn btn-secondary",
-                      attrs: { type: "button", "data-dismiss": "modal" }
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: { click: _vm.annuler }
                     },
                     [_vm._v("Annuler")]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
-                    _vm._g(
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      _vm.Resultat
-                    ),
-                    [_vm._v("Confirmer")]
+                    {
+                      staticClass: "btn btn-primary",
+                      on: { click: _vm.suivant }
+                    },
+                    [_vm._v(" Suivant ")]
                   )
                 ])
               ])
@@ -41682,11 +41836,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Confirmer votre infrastructure réseau")]
-      ),
+      _c("h5", { staticClass: "modal-title", attrs: { id: "labelModal" } }, [
+        _vm._v("Confirmer votre infrastructure réseau")
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -41700,6 +41852,205 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "card", attrs: { id: "q1" } }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v(
+            "\n                                Questionnaire pour votre infrastructure\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "card-title texts" }, [
+            _vm._v("Comment est votre adressage IP ?")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { name: "year_subjects", id: "q1rep" }
+            },
+            [
+              _c(
+                "option",
+                { attrs: { type: "checkbox", value: "1", id: "reseau" } },
+                [
+                  _c("nav", [
+                    _vm._v(
+                      "Adresse Sectorisé (différent plage d'adresse séparé par des VLAN)"
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                { attrs: { type: "checkbox", value: "2", id: "reseaux" } },
+                [
+                  _c("nav", [
+                    _vm._v(
+                      "adresse commune (même plage d'ip sur le réseau et 1 seule VLAN)"
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("hr", { staticClass: "id" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: { display: "none" },
+          attrs: { id: "q2" }
+        },
+        [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(
+              "\n                                Questionnaire pour le matériel de votre entreprise\n                            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", { staticClass: "texts" }, [
+              _vm._v(
+                "Quelles sont les marques utiliser pour votre matériel informatique ?"
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "form-control",
+                attrs: { name: "year_subject", id: "q2rep" }
+              },
+              [
+                _c("option", { attrs: { value: "theme1", id: "cisco" } }, [
+                  _c("nav", [_vm._v("Cisco")])
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme2", id: "fortinet" } }, [
+                  _c("nav", [_vm._v("fortinet")])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { attrs: { value: "theme3", id: "alcatellucent" } },
+                  [_c("nav", [_vm._v("alcatel lucent")])]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme4", id: "netgear" } }, [
+                  _c("nav", [_vm._v("netgear")])
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme5", id: "hp" } }, [
+                  _c("nav", [_vm._v("hp")])
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme6", id: "dell" } }, [
+                  _c("nav", [_vm._v("dell")])
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme7", id: "ibm" } }, [
+                  _c("nav", [_vm._v("ibm")])
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "theme8", id: "autre" } }, [
+                  _c("nav", [_vm._v("autre")])
+                ])
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep1" } }, [
+        _vm._v(
+          "\n                            il vaudrais mieux mettre vos adresses en commune\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep2" } }, [
+        _vm._v(
+          "\n                            Si vous avez autre qu'un cisco il faut que vous vérifié si vous avez le spanning tree activé\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep3" } }, [
+        _vm._v(
+          "\n                            L'avantage du spanning tree protocole est d'éviter les boucles ou tempête de broadcast au sein du réseau et donc de garantir la continuité de service de ce dernier.\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep4" } }, [
+        _vm._v(
+          "\n                            Afin d'avoir la meilleure communication entre deux routeurs, il est préconisé d'utiliser de la fibre.\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep5" } }, [
+        _vm._v(
+          "\n                            il est préconisé de placer vos serveurs dans une salle fermé et climatisé afin de maintenir refroidit les serveurs et qu'ils ne surchauffent pas.\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep6" } }, [
+        _vm._v(
+          "\n                            il vous faudrais un active directory sur vos postes de travail pour avoir une sécurité supplémentaire\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep7" } }, [
+        _vm._v(
+          "\n                            il vous faudrais un mot de passe avec au moins 12 caractère\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep8" } }, [
+        _vm._v(
+          "\n                            Il est nécessaire  déclare la totalité de vos VLAN sinon la communication ne pourra pas se faire entre le routeur et les machines de vos VLAN.\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep9" } }, [
+        _vm._v(
+          "\n                            en tant que petite entité le DHCP est a privilégier pour les postes de travail, les tables de routages seront réservées aux équipements réseau (routeurs, switchs).\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep10" } }, [
+        _vm._v(
+          "\n                            il faut désactiver le protocole HTTP car il n'est pas sécurisé, c'est à dire que si quelqu'un intercepte les données il verra tout apparent en clair.\n                            "
+        ),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "rep11" } }, [
+        _vm._v(
+          "\n                            Il faut désactiver le protocole telnet, ce protocole n'est pas sécurisé car il ne crypte pas les données\n                            "
+        ),
+        _c("hr")
+      ])
     ])
   }
 ]
